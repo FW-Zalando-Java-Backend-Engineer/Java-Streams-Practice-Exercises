@@ -82,6 +82,12 @@ Create a custom collector to process a `Stream<String>` of sentences and return 
 * total word count
 * average words per sentence
 
+### 💡 Hints:
+
+* Use a class `SentenceStats` with `int sentenceCount`, `int wordCount`.
+* `accumulator()` should split each sentence by space and update counters.
+* `getAverage()` = wordCount / sentenceCount.
+
 ### ✅ Concepts:
 
 * Custom `Collector`
@@ -96,6 +102,12 @@ Create a custom collector to process a `Stream<String>` of sentences and return 
 You have a list of `Author`, each with `List<Book>`, each `Book` has `List<String>` pages.
 Use **three levels of flatMap** to get a `List<String>` of all pages from all books by all authors.
 
+### 💡 Hints:
+
+* Start with `authors.stream()`
+* Use `.flatMap(author -> author.getBooks().stream())`
+* Then `.flatMap(book -> book.getPages().stream())`
+
 ### ✅ Concepts:
 
 * Nested `flatMap()`
@@ -107,6 +119,11 @@ Use **three levels of flatMap** to get a `List<String>` of all pages from all bo
 ### **Task:**
 
 Given a `List<Event>` with a `LocalDate` field, group all events by `DayOfWeek`.
+
+### 💡 Hints:
+
+* Use `event.getDate().getDayOfWeek()`
+* Requires importing `java.time.DayOfWeek`
 
 ### ✅ Concepts:
 
@@ -124,6 +141,12 @@ Write a custom collector that accepts `Item` objects and outputs a `ShoppingSumm
 * total price
 * average price
 
+### 💡 Hints:
+
+* Use a mutable object to accumulate totals.
+* `supplier()` returns a new `ShoppingSummary`.
+* Final result can be just `ShoppingSummary` (no map needed).
+
 ### ✅ Concepts:
 
 * Custom `Collector`
@@ -140,16 +163,28 @@ Given a `List<Employee>` with `List<Project>` each with `status` and `budget`, b
 * Count of active projects per department
 * Average budget of completed projects per department
 
+### 💡 Hints:
+
+* Use `.flatMap()` to access all projects
+* Add `.filter(p -> p.getStatus().equals("active"))`
+* Combine `groupingBy()` with `counting()` or `averagingDouble()`
+
 ### ✅ Concepts:
 
 * Combining `flatMap`, `filter`, `groupingBy`, `averagingDouble`, `counting`
 
 ---
 
-## 🧠 Tips:
+## 📚 References & Resources
 
-* Practice in small steps — each method builds confidence.
-* Use `System.out.println()` to debug results.
-* Prefer immutability: don’t modify lists in place.
+* [Baeldung: Java Collectors Guide](https://www.baeldung.com/java-collectors)
+* [Nick Samoylov’s Blog: Java Streams FlatMap and Collectors](https://nicksamoylov.com/java/java-streams-37-collect-13-collectors-flatmapping-collector/)
+* [Stack Overflow: flatMap with Collectors](https://stackoverflow.com/questions/44749463/perform-flatmap-operation-with-collectors)
+* Java Documentation:
+
+  * [`Stream`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/stream/Stream.html)
+  * [`Collector`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/stream/Collector.html)
+
+---
 
 Good luck, and enjoy exploring the power of Java Streams! 🚀
